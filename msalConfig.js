@@ -10,7 +10,7 @@ const msalConfig = {
   },
   brand: {
     name: "VerifySkunk",
-    logoUrl: "https://raw.githubusercontent.com/Skunkworks-Digital/sso/5e2e6f01600d2119d9ac9a42f65b4f40b9f34210/assets/4.svg"
+    logoUrl: "/assets/4.svg"  // ✅ Local, CSP-safe
   }
 };
 
