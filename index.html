@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skunkworks SSO</title>
+  <script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js"></script>
+  <script src="./msalConfig.js" defer></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #005fa3;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #0078d4;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Skunkworks SSO</h1>
+  <p>Secure login powered by Microsoft Entra ID and MSAL.js</p>
+  <button onclick="signIn()">Sign In</button>
+  <button onclick="signOut()">Sign Out</button>
+
+  <script>
+    const signIn = () => msalInstance.loginRedirect();
+    const signOut = () => msalInstance.logoutRedirect();
+  </script>
+</body>
+</html>
