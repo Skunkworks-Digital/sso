@@ -1,8 +1,8 @@
 const msalConfig = {
   auth: {
-    clientId: "YOUR_CLIENT_ID", // 🔁 Replace with your actual Application (client) ID
-    authority: "https://login.microsoftonline.com/YOUR_TENANT_ID", // 🔁 Replace with your Directory (tenant) ID
-    redirectUri: "https://sso.skunkworks.africa/auth-callback" // Must match the registered redirect URI in Azure
+    clientId: "1c8e310a-72f0-4527-9bed-fb48ac099b8e",
+    authority: "https://login.microsoftonline.com/common", // or tenant-specific
+    redirectUri: "https://sso.skunkworks.africa/verify"
   },
   cache: {
     cacheLocation: "localStorage", // or 'sessionStorage'
