@@ -4,11 +4,28 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://alcdn.msauth.net; connect-src https://login.microsoftonline.com https://graph.microsoft.com; img-src 'self' https://github.com data:;">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <title>VerifySkunk | Skunkworks SSO</title>
-  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Skunkworks-Digital/sso/5e2e6f01600d2119d9ac9a42f65b4f40b9f34210/assets/4.svg" />
 
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://alcdn.msauth.net;
+    connect-src https://login.microsoftonline.com https://graph.microsoft.com;
+    img-src 'self' https://github.com data:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="permissions-policy" content="interest-cohort=()"/>
+
+  <title>VerifySkunk | Skunkworks SSO</title>
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Skunkworks-Digital/sso/refs/heads/main/assets/4.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- MSAL Libraries -->
   <script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js" defer></script>
   <script src="./msalConfig.js" defer></script>
 
@@ -41,21 +58,23 @@
       background-color: var(--foreground);
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
       text-align: center;
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
+      transition: all 0.3s ease-in-out;
     }
 
     #brand-logo {
-      height: 60px;
-      margin-bottom: 20px;
+      height: 64px;
+      width: auto;
+      margin-bottom: 1.5rem;
     }
 
     h1 {
       font-size: 1.6rem;
-      margin-bottom: 0.5rem;
       color: var(--primary);
+      margin-bottom: 0.5rem;
     }
 
     p {
@@ -67,7 +86,7 @@
       background-color: var(--primary);
       color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       padding: 12px 20px;
       font-size: 1rem;
       margin: 0.5rem 0;
@@ -86,7 +105,7 @@
       }
 
       h1 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
 
       button {
@@ -96,9 +115,10 @@
     }
   </style>
 </head>
+
 <body>
   <main id="container">
-    <img id="brand-logo" href="https://raw.githubusercontent.com/Skunkworks-Digital/sso/5e2e6f01600d2119d9ac9a42f65b4f40b9f34210/assets/4.svg" alt="VerifySkunk Logo" />
+    <img id="brand-logo" src="https://raw.githubusercontent.com/Skunkworks-Digital/sso/refs/heads/main/assets/4.svg" alt="VerifySkunk Logo" />
     <h1>Welcome to VerifySkunk</h1>
     <p>Secure login powered by Microsoft Entra ID and MSAL.js</p>
     <button onclick="signIn()">🔐 Sign In</button>
@@ -108,12 +128,12 @@
   <script>
     window.onload = () => {
       const logo = document.getElementById("brand-logo");
-      if (logo && msalConfig?.brand?.logoUrl) {
+      if (logo && typeof msalConfig !== 'undefined' && msalConfig?.brand?.logoUrl) {
         logo.src = msalConfig.brand.logoUrl;
       }
 
       if (!window.msalInstance) {
-        console.error("MSAL instance not initialized.");
+        console.warn("⚠️ MSAL instance not yet initialized.");
       }
     };
 
@@ -133,5 +153,23 @@
       }
     };
   </script>
+
+  <noscript>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background-color: #fff0f0;
+        color: #900;
+        text-align: center;
+      }
+    </style>
+    <div>
+      <h2>⚠️ JavaScript Required</h2>
+      <p>Please enable JavaScript to use this application securely.</p>
+    </div>
+  </noscript>
 </body>
 </html>
